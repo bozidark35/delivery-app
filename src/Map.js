@@ -14,10 +14,10 @@ const Map = (props) => {
     const [center, setCenter] = useState([33.5040, 36.2988])
     return (
         <div>
-            <button onClick={() => { 
+            <button onClick={() => {
                 setCoordinates([(coordinates[0] + 0.002), coordinates[1]])
                 setCenter([center[0] + 0.002, center[1]])
-                 }}>Move</button>
+            }}>Move</button>
             <MapContainer
                 doubleClickZoom={false}
                 id="mapId"
@@ -27,8 +27,8 @@ const Map = (props) => {
             >
                 <Marker position={coordinates} icon={driverIcon} />
                 <TileLayer
-                    url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-                    attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <RoutingMachine />
             </MapContainer>
