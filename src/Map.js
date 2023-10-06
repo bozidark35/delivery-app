@@ -1,0 +1,39 @@
+import React, { useState } from "react";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import RoutingMachine from "./RoutingMachine";
+import { Icon, Point } from "leaflet";
+
+const Map = (props) => {
+    const driverIcon = new Icon({
+        iconUrl: "https://static.thenounproject.com/png/509406-200.png",
+        iconRetinaUrl: 'https://static.thenounproject.com/png/509406-200.png',
+        popupAnchor: [-0, -0],
+        iconSize: [32, 45],
+    });
+    const [coordinates, setCoordinates] = useState([41.28079160188733, 21.488530597196714])
+    const [center, setCenter] = useState([33.5040, 36.2988])
+    return (
+        <div>
+            <button onClick={() => { 
+                setCoordinates([(coordinates[0] + 0.002), coordinates[1]])
+                setCenter([center[0] + 0.002, center[1]])
+                 }}>Move</button>
+            <MapContainer
+                doubleClickZoom={false}
+                id="mapId"
+                zoom={90}
+                style={{ minHeight: "800px" }}
+                center={center}
+            >
+                <Marker position={coordinates} icon={driverIcon} />
+                <TileLayer
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+                    attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
+                />
+                <RoutingMachine />
+            </MapContainer>
+        </div>
+    );
+};
+
+export default Map;
